@@ -1,52 +1,42 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <title>Javascript</title>
-  </head>
-  <body>
-    <h1>Best JS Course</h1>
-    <p>DOM Tree Structure</p>
-  </body>
-</html>
- -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Best JS Course</title>
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;800&display=swap"
-      rel="stylesheet"
-    /> -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Best JS Course</h1>
-    <p>Understanding The DOM Tree Structure</p>
-    <hr />
-    <p>It's easy. Helps JS to communicate with HTML</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 methods for showing Events</title>
+</head>
+<body>
+    <h1>Inline Events</h1>
+    <button onclick="alert('welcome S!')">Single click greet</button>
+    <button ondblclick="alert('welcome D!')">Double click greet</button>
+    <button onmouseover="alert('welcome MO!')">Mouse over greet</button>
 
-    <!-- * Let's see DOM Navigation -->
+    <h1>DOM Event Handler</h1>
+    <button id="myBtn1">btn1</button>
+    <button id="myBtn2">btn2</button>
+
+    <h1>AddEventListener event handler</h1>
+    <button id="myBtn3">btn3</button>
+    <button id="myBtn4">btn4</button>
+
     <script>
-      let parent = document;
-      let htmlBody = document.body;
-      let htmlHead = document.head;
+        // document.getElementById("myBtn").onclick = () => {
+        //     alert("Welcome dom!");
+        // };
+        document.getElementById("myBtn1").onclick = function() {
+            alert("Welcome dom S!");
+        };
+        document.getElementById("myBtn2").onmouseover = function() {
+            alert("Welcome dom MO!");
+        };
 
-      // let bodyChild = htmlBody.childNodes;
-      let bodyChild = htmlBody.children;
 
-      let firstChild = htmlBody.firstElementChild;
-      // let firstChild = htmlBody.firstChild;
-
-      // let lastChild = htmlBody.lastChild;
-
-      let nextSibling = firstChild.nextElementSibling;
-
-      let previousSibling = nextSibling.previousElementSibling;
-
-      let parentNode = previousSibling.parentElement;
-
-      console.log(parentNode);
+        document.getElementById("myBtn3").addEventListener('click' ,function() {
+            alert("Welcome AEL S!");
+        });
+        document.getElementById("myBtn4").addEventListener('mouseover' , () => {
+            alert("Welcome AEL MO!");
+        });
     </script>
-  </body>
+</body>
 </html>
