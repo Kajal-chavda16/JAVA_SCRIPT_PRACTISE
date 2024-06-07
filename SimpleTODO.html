@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple TODO list </title>
+    <style>
+        button{
+            height: 18px;
+            width: 53px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Todo List</h1>
+        <label for="inputField">Input Here :</label>
+        <input type="text" name="inputField" id="inputField">
+        <button type="submit" value="submit" class="btn">submit</button>
+    <div id="list"></div>
+    <script>
+        let inputElem = document.getElementById("inputField");
+        let clickBtn = document.querySelector(".btn");
+        let todoList = document.querySelector("#list");
+
+       const addTodo = () => {
+        // console.log(inputElem.value);
+        let pElem = document.createElement("p");
+        pElem.textContent = inputElem.value;
+        // console.log(pElem);
+        todoList.append(pElem);
+
+        inputElem.value = "";
+       }
+
+       todoList.addEventListener('click' , () => {
+           console.log(event.target);
+           let currentElem = event.target;
+           currentElem.remove();
+       });
+        
+        clickBtn.addEventListener('click' , () => {
+            addTodo();
+        });
+    </script>
+</body>
+</html>
