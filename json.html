@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local storage and Json</title>
+</head>
+<body>
+
+    <h3><pre>
+        stringify    :     converts object to string     :    object -> string <br>
+        parse    :     converts string to its original object or format      :      string -> object </pre>
+    </h3>
+
+    <button id="myBtn1">add data to local storage</button>
+    <button id="myBtn2">get data from local storage</button>
+    <button id="myBtn3">delete data from local storage</button>
+
+    <script>
+
+        const studBioData = {
+            firstName : "Kajal",
+            lastName : "Chavda",
+            age : 22 
+        };
+
+        let btn1 = document.getElementById("myBtn1");
+        let btn2 = document.getElementById("myBtn2");
+        let btn3 = document.getElementById("myBtn3");
+
+        const addTodoList = () => {
+            // localStorage.setItem("StudentData" , studBioData);
+            localStorage.setItem("StudentData" , JSON.stringify(studBioData));
+        };
+
+        const getTodoList = () => {
+            let data = JSON.parse(localStorage.getItem("StudentData"));
+            console.log( typeof data);
+            console.log(data);
+        };
+
+        const removeTodoList = () => {
+            localStorage.removeItem("StudentData");
+        };
+
+        btn1.addEventListener('click' , addTodoList);
+        btn2.addEventListener('click' , getTodoList);
+        btn3.addEventListener('click' , removeTodoList);
+    </script>
+</body>
+</html>
+
