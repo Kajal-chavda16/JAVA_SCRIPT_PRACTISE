@@ -1,154 +1,79 @@
-//* ==============================
-//* DOM IN JAVASCRIPT
-//* ==============================
+//* =========================================
+//*  Timing Based Events in JavaScript
+//* =========================================
 
-//? When a web browser loads an HTML document, it parses the HTML source code and creates a tree-like structure known as the Document Object Model (DOM). This DOM tree represents the structure of the HTML document, with each HTML element being a node in the tree.
+//* 1. setTimeout:
+//? The setTimeout function is used to execute a function or code block after a specified delay in milliseconds.
 
-//? This entire DOM tree is then accessible to JavaScript as an object. JavaScript can interact with this object to manipulate the content, structure, and style of the document dynamically. The DOM essentially serves as an interface between the HTML document and JavaScript, providing a way for scripts to access and modify the document's structure and content.
+// function delayedFunction(x) {
+//   console.log("This function was delayed by 2000 milliseconds (2 seconds).", x);
+// }
 
-//todo The Document Object Model (DOM) is an Application Programming Interface (API). The DOM Tree is the structure of your HTML document, as represented by the DOM API. As stated, this API then gives us many methods and properties that we can use to manipulate the Tree, and therefore, by extension, the document.
+// setTimeout(delayedFunction, 2000);
+// setTimeout(() => delayedFunction(5), 2000);
 
-//* Here is a types of nodes in js:
+//* 2. setInterval:
+//? The setInterval function is used to repeatedly execute a function or code block at a specified interval in milliseconds.
 
-//? Element node:  An HTML tag, the tree building blocks.
+//? ex- mind game of counting seconds on mind and after every 5secs we need to draw a straight line on paper.
+// and it will continue till I told you to stop
 
-//? Text node:  In the DOM tree, text content, including new lines, spaces, and tabs, is treated as text nodes.
+// function repeatedFunction() {
+//   console.log(
+//     "This function will be repeated every 1000 milliseconds (1 second)."
+//   );
+// }
 
-//? Attribute node: An attribute of an element.
+// setInterval(repeatedFunction, 1000);
 
-//? Comment node: Represent comments within the HTML document.
+//* 3. Clearing Timeout with clearTimeout:
+//? If you want to cancel a scheduled timeout before it occurs, you can use the clearTimeout function.
 
-//? Processing instruction node:  A processing instruction node, such as <? xml-stylesheet … ?>.
+//? The global clearTimeout() method cancels a timeout previously established by calling setTimeout().
 
-//? Document node:  A document node.
+// Syntax:
+//* clearTimeout(timeoutID);
 
-//? Document type node: A document type node, such as <! DOCTYPE html>.
+// function delayedFunction() {
+//   console.log("This function was delayed by 2000 milliseconds (2 seconds).");
+// }
+// const myWork = setTimeout(delayedFunction, 2000);
+// clearTimeout(myWork);
 
-//* ==============================
-//* DOM Properties and Methods
-//* ==============================
-//! DOM Properties:
-// document
-// getElementById(id)
-// getElementsByClassName(className)
-// getElementsByTagName(tagName)
-// querySelector(selector)
-// querySelectorAll(selector)
-// innerHTML
-// textContent
-// style
+//todo Cancel the timeout before it occurs
 
-//! DOM Methods:
-// createElement(tagName)
-// appendChild(node)
-// removeChild(node)
-// addEventListener(event, function)
-// removeEventListener(event, function)
-// setAttribute(name, value)
-// getAttribute(name)
-// parentNode / parentElement
-// childNodes / children
-// firstChild / firstElementChild
-// lastChild / lastElementChild
-// nextSibling / nextElementSibling
-// previousSibling / previousElementSibling
-// closest(selector)
-// forEach (Array.from)
+//* 4. Clearing Interval with clearInterval:
+//? If you want to cancel a scheduled interval before it occurs, you can use the clearInterval function.
 
-//* ==============================
-//* DOM Navigation
-//* ==============================
+//? The global clearInterval() method cancels a timeout previously established by calling setInterval().
 
-//? document represents the entire document
-// console.log(document);
+// Syntax:
+// clearInterval(intervalID);
 
-//? Document.documentElement returns the Element that is the root element of the document (for example, the <html> element for HTML documents).
+// function repeatedFunction() {
+//   console.log("This function repeats every 1000 milliseconds (1 second).");
+// }
 
-//? parentNode / parentElement:
-// Navigate to the parent node or element.
+// const intervalID = setInterval(repeatedFunction, 1000);
 
-// Document and DocumentFragment nodes can never have a parent, so parentNode will always return null. It also returns null if the node has just been created and is not yet attached to the tree.
+// clearInterval(intervalID);
 
-//? childNodes / children:
-// Navigate to child nodes or elements.
+//todo Cancel the interval
 
-// childNodes is a property that returns a NodeList containing all child nodes of a given element, including text nodes and comment nodes.
+//* =========================================
+//*  Challenge Time
+//* =========================================
 
-//? firstChild / firstElementChild:
-// Navigate to the first child node or element.
+//! Write a JavaScript program that defines a function called repeatedFunction. This function should log the message "This function repeats every 1000 milliseconds (1 second)" to the console. Then, set up an interval using setInterval() to call repeatedFunction every 1000 milliseconds.  Additionally, after 5 seconds have elapsed, use setTimeout() to clear the interval previously set up. Make sure to log the message "Interval cleared after 5 seconds." when the interval is cleared.
 
-//todo The Element suffix in firstElementChild and similar properties signifies that only element nodes are considered.
+// const repeatedFunction = () => {
+//   console.log("This function repeats every 1000 milliseconds (1 second)");
+// };
 
-//? lastChild / lastElementChild:
-// Navigate to the last child node or element.
+// repeatedFunction();
 
-//? nextSibling / nextElementSibling:
-// Navigate to the next sibling node or element.
+// const intervalID = setInterval(repeatedFunction, 1000);
 
-//? previousSibling / previousElementSibling:
-// Navigate to the previous sibling node or element.
-
-//? closest(selector):
-// Find the closest ancestor of the current element that matches a given selector.
-
-//* ==============================
-//* DOM Filtering
-//* ==============================
-
-//? childNodes / children:
-// Get a NodeList or HTMLCollection and filter based on your criteria.
-
-//? Filtering Siblings:
-//? nextSibling / nextElementSibling
-//? previousSibling / previousElementSibling
-
-//? closest(selector):
-//? Find the closest ancestor that matches a given selector.
-//? The closest(selector) method is used to find the closest ancestor of an element that matches a specified CSS selector. This method traverses up the DOM tree, starting from the current element, and returns the first ancestor that matches the provided selector. If no matching ancestor is found, it returns null.
-
-//* ==============================
-//* DOM Searching
-//* ==============================
-//? getElementById(id): Find an element by its ID.
-
-//? getElementsByClassName(className): Find elements with a specific class name.
-
-//? getElementsByTagName(tagName): Find elements with a specific tag name.
-
-//? querySelector(selector): Find the first element that matches the specified CSS selector.
-
-//? querySelectorAll(selector): Find all elements that match the specified CSS selector.
-
-//* ============================================
-//* DOM - CRUD (Create, Read, Update, Delete):
-//* ============================================
-
-//? createElement(tagName): Create a new HTML element.
-
-//? appendChild(node): Append a node as the last child of a parent node.
-
-//? removeChild(node): Remove a child node from its parent.
-
-//? addEventListener(event, function): Create an event listener to handle events.
-
-//? removeEventListener(event, function): Remove an event listener.
-
-//? setAttribute(name, value): Set the value of an attribute on an element.
-
-//? getAttribute(name): Get the value of a specific attribute on an element.
-
-//? innerHTML: Read or update the HTML content of an element.
-
-//? textContent: Read or update the text content of an element.
-
-//* =============================
-//* DOM - Iteration
-//* =============================
-
-//? Iteration:
-//? forEach (Array.from): Iterate through NodeList or convert to an array for more flexible manipulation.
-
-// Very important
-//* When you use the browser's developer tools console to select an element and change its text content using JavaScript, you are directly manipulating the DOM object in memory. Since the DOM is a live representation of the document, any changes you make to the DOM objects are immediately reflected in the rendered web page.
-
-//* However, these changes are typically temporary and exist only in the current session. When you refresh the page or navigate away, the browser reloads the original HTML document from the server, and the DOM is reconstructed during the parsing process. Any modifications made to the DOM objects during the previous session are lost, and the page reverts to its original state.
+// setTimeout(() => {
+//   clearInterval(intervalID);
+// }, 5000);
