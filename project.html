@@ -1,79 +1,87 @@
+<!-- Creating a project to display the top 50 elements of the periodic table in groups of 10 with event delegation involves dynamically generating HTML elements, managing the event delegation, and displaying relevant information when an element is clicked.  -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Periodic Table</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      h1 {
+        text-align: center;
+        margin-bottom: 3.2rem;
+      }
+      .mainBody {
+        gap: 1.4rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .element {
+        width: 8rem;
+        height: 8rem;
+        margin: 5px;
+        border: 1px solid #d6417a;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.6rem;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+        &:hover {
+          background-color: #d6417a;
+          color: #000;
+        }
+      }
+    </style>
   </head>
   <body>
-    <section>
-      <p id="countDown">0</p>
-      <div class="buttons">
-        <button class="start_btn">Start</button>
-        <button class="reset_btn">Reset</button>
-        <button class="stop_btn">Stop</button>
-        <button class="time_btn">getTime</button>
-        <button class="clear_btn">clearTime</button>
-      </div>
-      <div class="resetValue"></div>
-    </section>
+    <h1>Event Delegation - Preodic Table</h1>
+    <section class="mainBody"></section>
     <script>
-      const countDownElement = document.getElementById("countDown");
-      const resetValueElement = document.querySelector(".resetValue");
-      let startCount = 0;
-      let intervalId;
+      // Function to create a periodic table element
+      const createPeriodicElement = (symbol, atomicNumber, name) => {
+        const element = document.createElement("div");
+        element.classList.add("element");
+        element.innerHTML = symbol;
 
-      // Function to start the timer
-      const startTimer = () => {
-        intervalId = setInterval(() => {
-          countDownElement.innerText = startCount++;
-        }, 1000);
+        element.setAttribute("data-atomic-number", atomicNumber);
+        element.setAttribute("data-element-name", name);
+
+        return element;
       };
 
-      // Function to stop the timer and show stop time
-      const stopTimer = () => {
-        showStopValue();
-        clearInterval(intervalId);
+      // Event handler for periodic table element click
+      const handleElementClick = (event) => {
+        const target = event.target;
+
+        if (target.classList.contains("element")) {
+          const atomicNumber = target.getAttribute("data-atomic-number");
+          const elementName = target.getAttribute("data-element-name");
+          alert(`Atomic Number: ${atomicNumber}\nElement Name: ${elementName}`);
+        }
       };
 
-      // Function to reset the timer
-      const resetTimer = () => {
-        startCount = 0;
-        countDownElement.innerText = startCount;
-        clearInterval(intervalId);
-      };
+      // Function to initialize the periodic table
+      function initializePeriodicTable() {
+        const mainBody = document.querySelector(".mainBody");
 
-      // Function to show stop value
-      const showStopValue = () => {
-        const newPara = document.createElement("p");
-        newPara.innerText = `The stop time is ${startCount - 1}`;
-        resetValueElement.append(newPara);
-      };
+        // Create 50 periodic table elements
+        for (let i = 1; i <= 50; i++) {
+          const element = createPeriodicElement(`Elem${i}`, i, `Element ${i}`);
+          mainBody.append(element);
+        }
 
-      // Function to show stop time
-      const clearTimeValue = () => {
-        resetValueElement.innerHTML = "";
-      };
+        // Add event delegation to the container
+        mainBody.addEventListener("click", handleElementClick);
+      }
 
-      // Event listeners
-      document
-        .querySelector(".start_btn")
-        .addEventListener("click", startTimer);
-
-      document
-        .querySelector(".reset_btn")
-        .addEventListener("click", resetTimer);
-
-      document.querySelector(".stop_btn").addEventListener("click", stopTimer);
-
-      document
-        .querySelector(".time_btn")
-        .addEventListener("click", showStopValue);
-
-      document
-        .querySelector(".clear_btn")
-        .addEventListener("click", clearTimeValue);
+      // Initialize the periodic table
+      initializePeriodicTable();
     </script>
   </body>
 </html>
